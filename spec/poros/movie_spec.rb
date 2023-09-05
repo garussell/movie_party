@@ -9,18 +9,18 @@ RSpec.describe Movie do
       title: 'Batman',
       vote_average: 7,
       runtime: 90,
-      genre: ["Action", "Crime"],
+      genre: %w[Action Crime],
       overview: 'A rich guy with a dark private life',
-      top_10: [{"Turo Pajala"=>"Taisto Kasurinen"},
-        {"Susanna Haavisto"=>"Irmeli Pihlaja"},
-        {"Matti Pellonpää"=>"Mikkonen"},
-        {"Eetu Hilkamo"=>"Riku"},
-        {"Erkki Pajala"=>"Miner"},
-        {"Matti Jaaranen"=>"Mugger"},
-        {"Hannu Viholainen"=>"Accomplice"},
-        {"Jorma Markkula"=>"Tallyman"},
-        {"Tarja Keinänen"=>"Woman in Harbour"},
-        {"Eino Kuusela"=>"Man on Beach"}],
+      top_10: [{ 'Turo Pajala' => 'Taisto Kasurinen' },
+               { 'Susanna Haavisto' => 'Irmeli Pihlaja' },
+               { 'Matti Pellonpää' => 'Mikkonen' },
+               { 'Eetu Hilkamo' => 'Riku' },
+               { 'Erkki Pajala' => 'Miner' },
+               { 'Matti Jaaranen' => 'Mugger' },
+               { 'Hannu Viholainen' => 'Accomplice' },
+               { 'Jorma Markkula' => 'Tallyman' },
+               { 'Tarja Keinänen' => 'Woman in Harbour' },
+               { 'Eino Kuusela' => 'Man on Beach' }],
       total_reviews: 0,
       review_authors: []
     }
@@ -46,7 +46,6 @@ RSpec.describe Movie do
   describe '.instance_methods' do
     describe 'format_runtime' do
       it "can format runtime to match '1h 30min'" do
-        
         expect(@movie.format_runtime).to eq('1h 30min')
       end
     end

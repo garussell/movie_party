@@ -18,13 +18,12 @@ class MovieFacade
   end
 
   def get_movie_image_by_id(movie_id)
-    base_image_url = 'https://image.tmdb.org/t/p/original'.freeze
+    base_image_url = 'https://image.tmdb.org/t/p/original'
 
     image = movie.movie_by_id(movie_id)
     poster_path = image[:poster_path]
 
-    full_image_url = "#{base_image_url}#{poster_path}"
-    full_image_url
+    "#{base_image_url}#{poster_path}"
   end
 
   def discovery?

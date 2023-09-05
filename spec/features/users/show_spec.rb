@@ -7,7 +7,7 @@ RSpec.describe 'users' do
     @user_1 = User.create!(name: 'Dolly', email: 'dolly@gmail.com', password: '123456', password_confirmation: '123456')
 
     @attendees = [bob = User.create!(name: 'Bob Ross', email: 'painter@gmail.com', password: '98765'),
-                 rick = User.create!(name: 'Rick Ross', email: 'music@gmail.com', password: '43210')]
+                  rick = User.create!(name: 'Rick Ross', email: 'music@gmail.com', password: '43210')]
     @movie = {
       id: 268,
       title: 'Batman',
@@ -32,16 +32,16 @@ RSpec.describe 'users' do
 
     movie_facade_instance = MovieFacade.new('Batman')
     allow(movie_facade_instance).to receive(:get_search_movies).and_return(@movie)
-    allow(MovieFacade).to receive(:new).and_return(movie_facade_instance)        
+    allow(MovieFacade).to receive(:new).and_return(movie_facade_instance)
 
     @watch_party = @user_1.watch_parties.new(
-      host: @user_1.name, 
-      movie: @movie[:title], 
-      duration: @movie[:runtime], 
-      time: @movie[:time], 
-      date: @movie[:watch_data], 
+      host: @user_1.name,
+      movie: @movie[:title],
+      duration: @movie[:runtime],
+      time: @movie[:time],
+      date: @movie[:watch_data],
       user_ids: [bob.id, rick.id]
-      )
+    )
 
     visit user_path(@user_1)
   end

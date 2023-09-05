@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,6 +15,6 @@ Rails.application.routes.draw do
 
   resources :registrations, only: %i[index new create]
 
-  get "/login", to: "registrations#login_form"
-  post "/login", to: "registrations#login"
+  get '/login', to: 'registrations#login_form'
+  post '/login', to: 'registrations#login'
 end
