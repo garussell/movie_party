@@ -1,0 +1,37 @@
+<head>
+  <%= render "shared/welcome_link" %>
+  <h1>WatchParty</h1>
+</head>
+
+<body>
+  <h3>WatchParty Details</h3>
+
+  <p>Movie Title: <%= @movie.title %></p>
+  <%= form_with model: @watch_party, url: user_watch_parties_path(@user), local: true do |form| %>
+    <%= hidden_field_tag :movie_title, @movie.title %>
+    <%= hidden_field_tag :runtime, @movie.runtime %>
+    <%= hidden_field_tag :movie_id, @movie.id %>
+
+    <%= form.label :duration %>
+    <%= form.number_field :duration_minutes, value: @movie.runtime %>
+
+    <%= form.label :when %>
+    <%= form.date_field :date %>
+
+    <%= form.label :start_time %>
+    <%= form.time_field :start_time %><br><br>
+    
+    <%= form.label :users, "Invite Other Users" %>
+    <% User.all.each do |user| %>
+      <ul>
+        <% if @user != user %>
+        <%= form.check_box :user_ids, { multiple: true }, user.id %>
+        <%= user.name %>
+        <% end %>
+      </ul>
+    <% end %>
+      
+    <%= form.submit %>
+  <% end %>
+    
+</body>

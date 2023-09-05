@@ -1,0 +1,22 @@
+<h2>Register</h2>
+<%= form_for @user, url: registrations_path do |f| %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+  </div>
+
+  <% if @user.errors[:email].any? %>
+    <div class="error">
+      <%= @user.errors[:email].join(', ') %>
+    </div>
+  <% end %>
+  
+  <div>
+    <%= f.submit 'Register' %>
+  </div>
+<% end %>

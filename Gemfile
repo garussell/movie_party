@@ -67,7 +67,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'rubocop-rails'
 end
+
+gem 'faraday'
 
 group :test do
   gem 'capybara'

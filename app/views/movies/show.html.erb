@@ -1,0 +1,28 @@
+<%= render "shared/welcome_link" %>
+<%= render "shared/discover_button" %><br>
+
+<%= link_to "Create Watch Party", new_user_watch_party_path(@user, id: @movie.id), class: "button" %>
+
+<body>
+  <h3><%= @movie.title %></h3>
+  <ul>
+    <p><strong>Vote: </strong><%= @movie.vote_average %></p>
+    <p><strong>Runtime: </strong><%= @movie.format_runtime %></p>
+    <p><strong>Genre: </strong><%= @movie.format_genre %></p>
+    <p><strong>Summary: </strong><%= @movie.overview %></p>
+    <p><strong>Cast and Characters: </strong><br>
+
+    <% @movie.top_10.each do |cast| %>
+      <p><%= cast.keys.first %> as <%= cast.values.first %></p>
+    <% end %>
+      
+    <p><strong><%= @movie.total_reviews %> Reviews</strong></p>
+    <p><strong>Review Authors</strong></p>
+    
+    <% @movie.review_authors.each do |author| %>
+      <p>Author: <%= author[:author] %></p>
+      <p>Review: <%= author[:content] %></p><br>
+    <% end %>
+      
+  </ul>
+</body>

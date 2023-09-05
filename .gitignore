@@ -31,3 +31,6 @@
 /config/master.key
 /coverage
 
+/config/application.yml
+
+spec/fixtures/vcr_cassettes

@@ -1,0 +1,27 @@
+<%= render "shared/welcome_link" %>
+<br>
+<head>
+  <h1><%= "#{@user.name}'s Dashboard" %></h1>
+</head>
+<br>
+<body>
+  <%= button_to "Discover Movies", user_discover_index_path(@user), class: "button", method: :get %>
+</body>
+<br>
+<h3><%= "#{@user.name}'s Watch Parties" %></h3>
+
+<div>
+<% if !@watch_party.nil? %>
+  <%=  image_tag(@image, size: "300x450") %><br>
+  <%= link_to @watch_party[:movie], user_movie_path(@user, @movie.id), method: :get %>
+  
+  <p>Date: <%= @watch_party[:date] %></p>
+  <p>Time: <%= @watch_party[:time] %></p>
+  
+  <h4>Invited</h4>
+  <% @attendees.each do |attendee| %>
+    <p>Name: <%= attendee.name %></p>
+    <p>Email: <%= attendee.email %></p>
+  <% end %>
+<% end %>
+</div>
