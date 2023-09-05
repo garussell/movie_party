@@ -1,0 +1,6 @@
+<% if current_user %>
+  <%= link_to "Log Out" %>
+<% else %>
+  <%= link_to "Register as a User", new_registration_path %>
+
+<% end %>

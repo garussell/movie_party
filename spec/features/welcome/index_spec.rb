@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'root path' do
   before do
-    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com')
+    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com', password_digest: 'password123')
 
     visit welcome_index_path
   end

@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'users' do
   before do
-    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com')
+    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com', password_digest: 'password123')
 
-    @attendees = [bob = User.create!(name: 'Bob Ross', email: 'painter@gmail.com'),
-                 rick = User.create!(name: 'Rick Ross', email: 'music@gmail.com')]
+    @attendees = [bob = User.create!(name: 'Bob Ross', email: 'painter@gmail.com', password_digest: 'password123'),
+                 rick = User.create!(name: 'Rick Ross', email: 'music@gmail.com', password_digest: 'password123')]
     @movie = {
       id: 268,
       title: 'Batman',

@@ -1,19 +1,23 @@
 # frozen_string_literal: true
 
 class RegistrationsController < ApplicationController
+  def index
+  end
+  
   def new
     @user = User.new
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to welcome_index_path(@user)
-    else
-      render :new
-    end
+    user = User.create(user_params)
+    user.name = user.name.downcase
+  
+    session[:user_id] = user.id
+      flash[:success] = "Welcome, #{user.name}!"
+      
+    redirect_to welcome_index_path
   end
-
+  
   private
 
   def user_params
