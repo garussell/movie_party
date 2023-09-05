@@ -13,9 +13,7 @@
   <body>
   
     <% flash.each do |type, message| %>
-      <section class=<%= type %>>
-      <p><%= message %></p>
-      </section>
+      <%= content_tag :div, message, class: type %>
     <% end %>
 
     <%= yield %>

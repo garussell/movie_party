@@ -10,5 +10,9 @@ Rails.application.routes.draw do
     resources :movies, only: %i[index show]
     resources :watch_parties, only: %i[new create]
   end
+
   resources :registrations, only: %i[index new create]
+
+  get "/login", to: "registrations#login_form"
+  post "/login", to: "registrations#login"
 end

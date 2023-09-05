@@ -1,24 +1,18 @@
 <h2>Register</h2>
-<%= form_for @user, url: registrations_path do |f| %>
+<%= form_for @user, url: registrations_path, data: { turbo: false } do |f| %>
 
   <div>
     <%= f.label :name, 'Username:' %>
-    <%= f.text_field :name, required: true %>
+    <%= f.text_field :name %>
   
     <%= f.label :password, 'Password:' %>
-    <%= f.password_field :password, required: true %>
+    <%= f.password_field :password %>
 
     <%= f.label :password_confirmation, 'Password Confirmation:' %>
-    <%= f.password_field :password_confirmation, required: true %>
+    <%= f.password_field :password_confirmation %>
 
     <%= f.label :email %>
-    <%= f.email_field :email, required: true %>
-
-  <% if @user.errors[:email].any? %>
-    <div class="error">
-      <%= @user.errors[:email].join(', ') %>
-    </div>
-  <% end %>
+    <%= f.email_field :email %>
   
     <%= f.submit 'Register' %>
 
