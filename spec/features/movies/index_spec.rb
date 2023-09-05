@@ -21,6 +21,7 @@ RSpec.describe 'users discover path' do
         click_on 'Find Top Rated Movies'
 
         expect(page).to have_current_path(user_movies_path(@user_1))
+
         expect(page).to have_link('Elemental')
         expect(page).to have_content('Vote Average')
       end
