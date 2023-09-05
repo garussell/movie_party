@@ -32,8 +32,8 @@ class WatchPartiesController < ApplicationController
       attendees = invited_users.each do |user|
         UsersWatchParty.create!(user_id: user.id, watch_party_id: watch_party.id)
       end
-  
-      redirect_to user_path(user_id, movie_id: movie_id, watch_party_params: watch_party_params,attendees: attendees)
+
+      redirect_to user_path(user_id, movie_id:, watch_party_params:, attendees:)
     else
       flash[:error] = "Duration cannot be less than runtime - #{movie_runtime} minutes"
       redirect_back(fallback_location: root_path)

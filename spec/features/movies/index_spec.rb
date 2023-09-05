@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'users discover path' do
   before do
-    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com')
+    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com', password: 'password123')
 
     visit user_discover_index_path(@user_1)
   end

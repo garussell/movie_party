@@ -5,11 +5,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @watch_party = params[:watch_party_params]
 
-    if params[:attendees].nil?
-      @attendees = params[:attendees]&.map { |attendee_id| User.find(id) }
-    else
-      @attendees = User.find(params[:attendees])
-    end
+    @attendees = if params[:attendees].nil?
+                   params[:attendees]&.map { |_attendee_id| User.find(id) }
+                 else
+                   User.find(params[:attendees])
+                 end
 
     @facade = MovieFacade.new(params[:id])
     @movie = @facade.get_movie_by_id(params[:movie_id])

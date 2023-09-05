@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'users' do
   before do
-    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com')
+    @user_1 = User.create!(name: 'Dolly', email: 'dolly@gmail.com', password: '123456', password_confirmation: '123456')
 
-    @attendees = [bob = User.create!(name: 'Bob Ross', email: 'painter@gmail.com'),
-                 rick = User.create!(name: 'Rick Ross', email: 'music@gmail.com')]
+    @attendees = [bob = User.create!(name: 'Bob Ross', email: 'painter@gmail.com', password: '98765'),
+                  rick = User.create!(name: 'Rick Ross', email: 'music@gmail.com', password: '43210')]
     @movie = {
       id: 268,
       title: 'Batman',
@@ -32,23 +32,23 @@ RSpec.describe 'users' do
 
     movie_facade_instance = MovieFacade.new('Batman')
     allow(movie_facade_instance).to receive(:get_search_movies).and_return(@movie)
-    allow(MovieFacade).to receive(:new).and_return(movie_facade_instance)        
-    
-    @watch_party = @user_1.watch_parties.create!(
-      host: @user_1.name, 
-      movie: @movie[:title], 
-      duration: @movie[:runtime], 
-      time: @movie[:time], 
-      date: @movie[:watch_data], 
+    allow(MovieFacade).to receive(:new).and_return(movie_facade_instance)
+
+    @watch_party = @user_1.watch_parties.new(
+      host: @user_1.name,
+      movie: @movie[:title],
+      duration: @movie[:runtime],
+      time: @movie[:time],
+      date: @movie[:watch_data],
       user_ids: [bob.id, rick.id]
-      )
+    )
 
     visit user_path(@user_1)
   end
 
   describe 'dashboard' do
     it 'has user name' do
-      expect(page).to have_content("Ringo's Dashboard")
+      expect(page).to have_content("Dolly's Dashboard")
     end
 
     it 'has button to Discover Movies page' do
