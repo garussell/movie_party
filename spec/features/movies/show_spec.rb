@@ -56,5 +56,15 @@ RSpec.describe 'users movies show page', :vcr do
         expect(current_path).to eq(new_user_watch_party_path(@user_1))
       end
     end
+
+    describe "sad path - when not logged in or registered user" do
+      it "when I click on 'Create Watch Parth', I'm redirected to the movies show page, and a message appears to let me know I must be logged in or registered to create a movie party" do
+        visit user_movie_path(user_2, @movie_data[:id])
+        click_on 'Create Watch Party'
+
+        expect(page).to have_text("Need to lig in or register")
+        expect(page).to have_current_path(root_path)
+      end
+    end
   end
 end

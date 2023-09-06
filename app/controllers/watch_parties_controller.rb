@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WatchPartiesController < ApplicationController
+  before_action :require_login
+
   def new
     @user = User.find(params[:user_id])
     @watch_party = @user.watch_parties.new
@@ -31,6 +33,13 @@ class WatchPartiesController < ApplicationController
   
 
   private
+
+  def require_login
+    if inactive_session?
+      flash[:error] = "You need to log in or register to create a watch party"
+      redirect_to login_path
+    end
+  end
 
   def watch_party_params
     {

@@ -59,6 +59,4 @@ RSpec.describe 'users' do
       expect(page).to have_current_path(user_discover_index_path(@user_1))
     end
   end
-
-  
 end
