@@ -1,1 +1,6 @@
-<%= button_to "Home", welcome_index_path, method: :get %>
+<% if current_user.admin? %>
+  <%= button_to "Home", welcome_index_path, method: :get %>
+<% else %>
+  <%= button_to "Home", user_path(current_user), method: :get %>
+<% end %>
+  

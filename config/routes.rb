@@ -6,7 +6,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'registrations#index'
 
+  get '/login', to: 'registrations#login_form'
+  post '/login', to: 'registrations#login'
+  delete '/logout', to: 'registrations#logout'
+
+  namespace :admin do
+    get '/dashboard', to: 'dashboard#index'
+  end
+
   resources :welcome, only: [:index]
+  
   resources :users do
     resources :discover, only: [:index]
     resources :movies, only: %i[index show]
@@ -15,6 +24,5 @@ Rails.application.routes.draw do
 
   resources :registrations, only: %i[index new create]
 
-  get '/login', to: 'registrations#login_form'
-  post '/login', to: 'registrations#login'
+
 end
