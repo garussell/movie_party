@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @watch_party = params[:watch_party_params]
 
     if @watch_party && params[:watch_party_params][:user_ids]
-      attendees = params[:watch_party_params][:user_ids].map { |id| id.to_i }
+      attendees = params[:watch_party_params][:user_ids].map(&:to_i)
       @attendees = attendees.map { |attendee| User.find_by(id: attendee) }.compact
     end
 
@@ -20,9 +20,9 @@ class UsersController < ApplicationController
   private
 
   def require_login
-    if inactive_session?
-      flash[:error] = "You need to log in or register"
-      redirect_to login_path
-    end
+    return unless inactive_session?
+
+    flash[:error] = 'You need to log in or register'
+    redirect_to login_path
   end
 end

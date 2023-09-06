@@ -13,14 +13,14 @@ class WatchPartiesController < ApplicationController
   def create
     user_id = params[:user_id]
     movie_runtime = params[:runtime].to_i
-    user_ids = invited_users
+    invited_users
     movie_id = params[:movie_id].to_i
-  
+
     if params[:watch_party][:duration_minutes].to_i >= movie_runtime
       watch_party = WatchParty.new(watch_party_params)
-  
+
       if watch_party.save(validate: false)
-        redirect_to user_path(user_id, movie_id: movie_id, watch_party_params: watch_party_params)
+        redirect_to user_path(user_id, movie_id:, watch_party_params:)
       else
         flash[:error] = watch_party.errors.full_messages.to_sentence
         redirect_back(fallback_location: root_path)
@@ -30,15 +30,14 @@ class WatchPartiesController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
-  
 
   private
 
   def require_login
-    if inactive_session?
-      flash[:error] = "You need to log in or register to create a watch party"
-      redirect_to login_path
-    end
+    return unless inactive_session?
+
+    flash[:error] = 'You need to log in or register to create a watch party'
+    redirect_to login_path
   end
 
   def watch_party_params
@@ -53,6 +52,6 @@ class WatchPartiesController < ApplicationController
   end
 
   def invited_users
-    params[:watch_party][:user_ids].reject { |id| id == "0" }
+    params[:watch_party][:user_ids].reject { |id| id == '0' }
   end
 end

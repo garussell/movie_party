@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  helper_method :current_user, 
-                :current_admin?, 
+  helper_method :current_user,
+                :current_admin?,
                 :inactive_session?
 
   def current_user
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_admin?
-    current_user && current_user.admin?
+    current_user&.admin?
   end
 
   def inactive_session?

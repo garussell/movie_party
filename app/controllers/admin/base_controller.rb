@@ -1,6 +1,9 @@
-class Admin::BaseController < ApplicationController
+# frozen_string_literal: true
 
-  def require_admin
-    render file: "/public/404.html" unless current_admin?
+module Admin
+  class BaseController < ApplicationController
+    def require_admin
+      render file: '/public/404.html' unless current_admin?
+    end
   end
 end

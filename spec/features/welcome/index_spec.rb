@@ -27,7 +27,7 @@ RSpec.describe 'root path' do
       it 'has a list of existing users which are links to user dashboard' do
         expect(page).to have_content(@user_1.email)
 
-        click_on "My Dashboard"
+        click_on 'My Dashboard'
 
         expect(page).to have_current_path(user_path(@user_1))
       end

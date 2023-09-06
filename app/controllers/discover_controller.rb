@@ -10,9 +10,9 @@ class DiscoverController < ApplicationController
   private
 
   def require_login
-    if inactive_session?
-      flash[:error] = "You need to log in or register to discover movies"
-      redirect_to login_path
-    end
+    return unless inactive_session?
+
+    flash[:error] = 'You need to log in or register to discover movies'
+    redirect_to login_path
   end
 end

@@ -16,10 +16,10 @@ class MoviesController < ApplicationController
 
   private
 
-    def require_login
-      if inactive_session?
-        flash[:error] = "You need to log in or register to look at movies"
-        redirect_to login_path
-      end
-    end
+  def require_login
+    return unless inactive_session?
+
+    flash[:error] = 'You need to log in or register to look at movies'
+    redirect_to login_path
+  end
 end

@@ -1,6 +1,9 @@
-class Admin::DashboardController < BaseController
-  before_action :require_admin
+# frozen_string_literal: true
 
-  def index
+module Admin
+  class DashboardController < BaseController
+    before_action :require_admin
+
+    def index; end
   end
 end

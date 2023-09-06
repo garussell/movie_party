@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :welcome, only: [:index]
-  
+
   resources :users do
     resources :discover, only: [:index]
     resources :movies, only: %i[index show]
@@ -23,6 +23,4 @@ Rails.application.routes.draw do
   end
 
   resources :registrations, only: %i[index new create]
-
-
 end
