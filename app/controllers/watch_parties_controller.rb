@@ -11,32 +11,39 @@ class WatchPartiesController < ApplicationController
   def create
     user_id = params[:user_id]
     movie_runtime = params[:runtime].to_i
-    movie_title = params[:movie_title]
-    user_ids = params[:watch_party][:user_ids]
-    invited_users = User.where(id: user_ids)
+    user_ids = invited_users
     movie_id = params[:movie_id].to_i
-
-    watch_party_params = {
-      host: user_id,
-      movie: movie_title,
-      duration: params[:watch_party][:duration_minutes],
-      time: params[:watch_party][:start_time],
-      date: params[:watch_party][:date],
-      users: invited_users
-    }
-
-    if params[:watch_party][:duration_minutes].to_i >= movie_runtime
-      watch_party = WatchParty.create!(watch_party_params)
-
-      UsersWatchParty.create!(user_id:, watch_party_id: watch_party.id)
-      attendees = invited_users.each do |user|
-        UsersWatchParty.create!(user_id: user.id, watch_party_id: watch_party.id)
-      end
   
-      redirect_to user_path(user_id, movie_id: movie_id, watch_party_params: watch_party_params,attendees: attendees)
+    if params[:watch_party][:duration_minutes].to_i >= movie_runtime
+      watch_party = WatchParty.new(watch_party_params)
+  
+      if watch_party.save(validate: false)
+        redirect_to user_path(user_id, movie_id: movie_id, watch_party_params: watch_party_params)
+      else
+        flash[:error] = watch_party.errors.full_messages.to_sentence
+        redirect_back(fallback_location: root_path)
+      end
     else
       flash[:error] = "Duration cannot be less than runtime - #{movie_runtime} minutes"
       redirect_back(fallback_location: root_path)
     end
+  end
+  
+
+  private
+
+  def watch_party_params
+    {
+      host: params[:user_id],
+      movie: params[:movie_title],
+      duration: params[:watch_party][:duration_minutes],
+      date: params[:watch_party][:date],
+      time: params[:watch_party][:start_time],
+      user_ids: invited_users
+    }
+  end
+
+  def invited_users
+    params[:watch_party][:user_ids].reject { |id| id == "0" }
   end
 end

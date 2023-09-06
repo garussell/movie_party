@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_162139) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_183737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,9 +23,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_162139) do
     t.integer "role", default: 0
   end
 
-  create_table "users_watch_parties", id: false, force: :cascade do |t|
+  create_table "users_watch_parties", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "watch_party_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_users_watch_parties_on_user_id"
+    t.index ["watch_party_id"], name: "index_users_watch_parties_on_watch_party_id"
   end
 
   create_table "watch_parties", force: :cascade do |t|

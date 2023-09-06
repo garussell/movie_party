@@ -20,9 +20,9 @@
   
   <p>Date: <%= @watch_party[:date] %></p>
   <p>Time: <%= @watch_party[:time] %></p>
-  
+
   <h4>Invited</h4>
-  <% @attendees.each do |attendee| %>
+  <% @attendees&.each do |attendee| %>
     <p>Name: <%= attendee.name %></p>
     <p>Email: <%= attendee.email %></p>
   <% end %>
