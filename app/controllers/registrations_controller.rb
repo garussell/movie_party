@@ -30,7 +30,7 @@ class RegistrationsController < ApplicationController
       if @user.admin?
         redirect_to admin_dashboard_path
       else
-        redirect_to user_path(@user)
+        redirect_to welcome_index_path
       end
     else
       flash[:error] = 'Wrong email or password.'

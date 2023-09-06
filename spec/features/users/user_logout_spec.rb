@@ -15,14 +15,22 @@ describe "User Log Out" do
       it "I no longer see a link to log in or create an account, but I see a link to Log Out. When I click the link to Log Out, I'm taken back to the landing page and I can see that the Log Out link has changed back to a Log In link" do
         expect(page).to have_current_path(welcome_index_path)
         
-        expect(page).to have_link("Log Out")
+        expect(page).to have_button("Log Out")
         expect(page).to_not have_link("Log In")
 
         click_on "Log Out"
 
         expect(page).to have_current_path(root_path)
-        expect(page).to_not have_link("Log Out")
+        expect(page).to_not have_button("Log Out")
         expect(page).to have_link("Log In")
+      end
+
+      it "If I'm not logged in or registered, I do not see the section of the page that lists existing users, and 'existing users are on links, but just a list of email addresses" do
+        click_on "Log Out"
+
+        visit welcome_index_path
+        expect(page).to_not have_content("Existing Users")
+
       end
     end
   end

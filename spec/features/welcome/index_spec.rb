@@ -4,8 +4,12 @@ require 'rails_helper'
 
 RSpec.describe 'root path' do
   before do
-    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com', password: 'password123',
-                           password_confirmation: 'password123')
+    @user_1 = User.create!(name: 'Ringo', email: 'ringo@gmail.com', password: '123456',
+                           password_confirmation: '123456')
+    visit login_path
+    fill_in :password, with: '123456'
+    fill_in :email, with: 'ringo@gmail.com'
+    click_on 'Log In'
 
     visit welcome_index_path
   end
@@ -13,17 +17,17 @@ RSpec.describe 'root path' do
   describe 'as a user' do
     describe 'when I visit the root path' do
       it 'should have the title of application' do
-        expect(page).to have_content('Watch Party Application')
+        expect(page).to have_content('Movie Party')
       end
 
       it 'has a button to create a new user' do
-        expect(page).to have_button('Create New User')
+        expect(page).to have_button('My Dashboard')
       end
 
       it 'has a list of existing users which are links to user dashboard' do
-        expect(page).to have_link(@user_1.email)
+        expect(page).to have_content(@user_1.email)
 
-        click_on @user_1.email
+        click_on "My Dashboard"
 
         expect(page).to have_current_path(user_path(@user_1))
       end
@@ -33,7 +37,7 @@ RSpec.describe 'root path' do
 
         click_on 'Home'
 
-        expect(page).to have_current_path(welcome_index_path)
+        expect(page).to have_current_path(user_path(@user_1))
       end
     end
   end

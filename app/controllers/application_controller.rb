@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  helper_method :current_user
+  helper_method :current_user, 
+                :current_admin?, 
+                :inactive_session?
 
   def current_user
     @_current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -9,5 +11,9 @@ class ApplicationController < ActionController::Base
 
   def current_admin?
     current_user && current_user.admin?
+  end
+
+  def inactive_session?
+    !current_user && !current_admin?
   end
 end
