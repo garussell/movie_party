@@ -1,1 +1,9 @@
-<%= button_to "Home", welcome_index_path, method: :get %>
+<% if inactive_session? %>
+  <p><%= link_to "Register as a User", new_registration_path %></p>
+  <p><%= link_to "Log In", login_path %></p>
+<% elsif current_admin? %>
+  <%= button_to "Home", welcome_index_path, method: :get %>
+<% elsif current_user %>
+  <%= button_to "Home", user_path(current_user), method: :get %>
+<% end %>
+  

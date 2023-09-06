@@ -1,4 +1,6 @@
 <%= render "shared/welcome_link" %>
+<%= render "shared/logout" %>
+
 <%= render "shared/discover_button" %><br>
 
 <%= link_to "Create Watch Party", new_user_watch_party_path(@user, id: @movie.id), class: "button" %>

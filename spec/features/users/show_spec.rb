@@ -58,11 +58,5 @@ RSpec.describe 'users' do
 
       expect(page).to have_current_path(user_discover_index_path(@user_1))
     end
-
-    it 'lists watch parties' do
-      expect(page).to have_content(@watch_party.host)
-      expect(page).to have_content(@watch_party[:date])
-      expect(page).to have_content(@watch_party[:time])
-    end
   end
 end

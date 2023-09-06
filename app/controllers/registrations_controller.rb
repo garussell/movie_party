@@ -11,6 +11,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.name}!"
       redirect_to registrations_path
     else
@@ -24,12 +25,23 @@ class RegistrationsController < ApplicationController
   def login
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
+      session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.name}!"
-      redirect_to welcome_index_path
+      if @user.admin?
+        redirect_to admin_dashboard_path
+      else
+        redirect_to welcome_index_path
+      end
     else
       flash[:error] = 'Wrong email or password.'
       render :login_form
     end
+  end
+
+  def logout
+    session.delete(:user_id)
+    flash[:notice] = 'Logged out successfully.'
+    redirect_to root_path
   end
 
   private
